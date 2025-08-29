@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>フィードバック | Re:Pra</title>
+  <meta name="description" content="Re:Praへのご意見・不具合報告フォーム" />
+  <style>
+    :root {
+      --bg-color: #111;
+      --text-color: #f0f0f0;
+      --muted: #b8b8b8;
+      --accent-color: #00bcd4;
+      --card-bg: #1a1a1a;
+      --danger: #ff6b6b;
+      --success: #12c48b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-color); color: var(--text-color);
+      display: flex; min-height: 100vh; flex-direction: column;
+    }
+    header {
+      padding: 2rem 1.25rem; text-align: center; background: #1a1a1a;
+    }
+    h1 { margin: 0 0 .25rem; color: var(--accent-color); font-size: 2rem; }
+    .catch { color: #ccc; font-size: .95rem; }
+
+    main {
+      width: 100%; max-width: 840px; margin: 0 auto; padding: 2rem 1.25rem;
+    }
+    .card {
+      background: var(--card-bg); border-radius: 12px; padding: 1.25rem; box-shadow: 0 6px 20px rgba(0,0,0,.25);
+    }
+    .lead { color: var(--muted); margin: 0 0 1rem; }
+    form { display: grid; gap: 1rem; }
+    label { display: block; font-weight: 600; margin-bottom: .35rem; }
+    .req { color: var(--accent-color); font-weight: 700; margin-left: .25rem; }
+    input[type="text"], input[type="email"], textarea, select {
+      width: 100%; padding: .9rem 1rem; background: #0f0f0f; color: var(--text-color);
+      border: 1px solid #2a2a2a; border-radius: 10px; outline: none;
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    .row { display: grid; gap: 1rem; }
+    @media (min-width: 720px) { .row.two { grid-template-columns: 1fr 1fr; } }
+
+    .hint { font-size: .85rem; color: var(--muted); margin-top: .4rem; }
+    .counter { font-variant-numeric: tabular-nums; }
+    .actions { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+    .btn {
+      background: var(--accent-color); color: #fff; border: none; padding: .9rem 1.25rem;
+      border-radius: 10px; cursor: pointer; font-weight: 700; transition: transform .04s ease, opacity .2s ease;
+    }
+    .btn:disabled { opacity: .6; cursor: not-allowed; }
+    .btn:active { transform: translateY(1px); }
+    .link { color: var(--accent-color); text-decoration: none; }
+    .link:hover { text-decoration: underline; }
+
+    .alert {
+      padding: .9rem 1rem; border-radius: 10px; margin: .25rem 0 0;
+      display: none;
+    }
+    .alert.success { background: rgba(18,196,139,.14); border: 1px solid rgba(18,196,139,.6); color: #b6ffe7; }
+    .alert.error { background: rgba(255,107,107,.12); border: 1px solid rgba(255,107,107,.6); color: #ffd6d6; }
+
+    footer { text-align: center; color: #aaa; padding: 2rem 1.25rem; }
+    .footer-links { margin-bottom: .5rem; }
+    .footer-links a { color: var(--accent-color); text-decoration: none; margin: 0 .5rem; }
+    .footer-links a:hover { text-decoration: underline; }
+
+    /* honeypot */
+    .hp { position: absolute; left: -9999px; visibility: hidden; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>フィードバック</h1>
+    <p class="catch">使ってみて気づいた点や不具合、改善要望などをお聞かせください。</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <p class="lead">※ 個別返信が必要な場合はメール欄をご記入ください。返信が不要な場合は未記入でも構いません。</p>
+
+      <form id="fbForm" action="https://formspree.io/f/xblagrgj" method="POST">
+        <!-- 必須: フィードバック種別 / アプリ -->
+        <div class="row two">
+          <div>
+            <label for="type">ご用件<span class="req">＊</span></label>
+            <select id="type" name="type" required>
+              <option value="" disabled selected>選択してください</option>
+              <option>不具合の報告</option>
+              <option>改善要望</option>
+              <option>使い方の質問</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div>
+            <label for="app">対象アプリ<span class="req">＊</span></label>
+            <select id="app" name="app" required>
+              <option value="" disabled selected>選択してください</option>
+              <option>Re:Pra SC</option>
+              <option>Re:Pra AP</option>
+              <option>Re:Pra PM</option>
+              <option>Re:Pra NW</option>
+              <option>Re:Pra DB</option>
+              <option>Re:Pra ES</option>
+              <option>Re:Pra ST</option>
+              <option>Re:Pra SA</option>
+              <option>その他</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 任意: 端末/OS/バージョン -->
+        <div class="row two">
+          <div>
+            <label for="device">端末（例: iPhone 15 Pro）</label>
+            <input id="device" name="device" type="text" inputmode="text" autocomplete="off" />
+          </div>
+          <div>
+            <label for="os">iOSバージョン（例: 17.6）</label>
+            <input id="os" name="os" type="text" inputmode="decimal" autocomplete="off" />
+          </div>
+        </div>
+
+        <!-- 本文 -->
+        <div>
+          <label for="message">内容（できるだけ具体的に）<span class="req">＊</span></label>
+          <textarea id="message" name="message" maxlength="1000" required placeholder="例）SCの午前II、2024秋の問題◯◯で表示崩れが起きます。再現手順は…"></textarea>
+          <div class="hint"><span id="counter" class="counter">0</span>/1000</div>
+        </div>
+
+        <!-- 任意: 連絡先・スクショURL -->
+        <div class="row two">
+          <div>
+            <label for="email">メール（返信が必要な場合）</label>
+            <input id="email" name="_replyto" type="email" placeholder="your@example.com" />
+            <div class="hint">※ 個人情報は返信用途以外に使用しません。</div>
+          </div>
+          <div>
+            <label for="screenshot">スクショ/動画URL（任意）</label>
+            <input id="screenshot" name="screenshot" type="text" placeholder="例）iCloud/YouTube等の共有URL" />
+          </div>
+        </div>
+
+        <!-- 同意 -->
+        <div>
+          <label>
+            <input type="checkbox" id="agree" required />
+            送信にあたって <a class="link" href="/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a> に同意します<span class="req">＊</span>
+          </label>
+        </div>
+
+        <!-- 追加メタ（自動） -->
+        <input type="hidden" name="page" value="feedback" />
+        <input type="hidden" name="_subject" value="Re:Pra フィードバック" />
+        <!-- honeypot（スパム低減） -->
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+
+        <div class="actions">
+          <button id="submitBtn" class="btn" type="submit" disabled>送信</button>
+          <a class="link" href="/" aria-label="トップへ戻る">← トップへ戻る</a>
+        </div>
+
+        <div id="ok" class="alert success" role="status">送信しました。ご協力ありがとうございます！</div>
+        <div id="ng" class="alert error" role="alert">送信に失敗しました。しばらくしてから再度お試しください。</div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/privacy.html">プライバシーポリシー</a> |
+      <a href="/support.html">サポートページ</a>
+    </div>
+    <small>© 2025 Mendoxa LLC. All rights reserved.</small>
+  </footer>
+
+  <script>
+    // フォームのUX強化（最低限のJS）
+    const form = document.getElementById('fbForm');
+    const counter = document.getElementById('counter');
+    const message = document.getElementById('message');
+    const agree = document.getElementById('agree');
+    const submitBtn = document.getElementById('submitBtn');
+    const ok = document.getElementById('ok');
+    const ng = document.getElementById('ng');
+
+    // 文字数カウンタ
+    const updateCounter = () => { counter.textContent = message.value.length; };
+    message.addEventListener('input', updateCounter); updateCounter();
+
+    // 必須条件満たすまで送信不可
+    const canSubmit = () => {
+      const requiredFilled =
+        form.type.value && form.app.value &&
+        message.value.trim().length > 0 && agree.checked;
+      submitBtn.disabled = !requiredFilled;
+    };
+    form.addEventListener('input', canSubmit); canSubmit();
+
+    // fetchでFormspreeに送信（成功/失敗UI）
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+
+      ok.style.display = 'none';
+      ng.style.display = 'none';
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form) // 添付がないのでJSONでも良いが互換性重視
+        });
+        if (res.ok) {
+          form.reset();
+          updateCounter(); canSubmit();
+          ok.style.display = 'block';
+        } else {
+          ng.style.display = 'block';
+        }
+      } catch (err) {
+        ng.style.display = 'block';
+      } finally {
+        // 2秒後に再度送信可能に
+        setTimeout(() => { canSubmit(); }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>
