@@ -137,21 +137,36 @@
     .app-link:hover {
       color: #fff;
     }
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 0.9rem;
-      background-color: #1a1a1a;
-      color: #aaa;
-    }
-    .footer-link {
-      color: var(--accent-color);
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
-    .footer-link:hover {
-      color: #fff;
-    }
+
+footer {
+  text-align: center;
+  padding: 2rem 1.25rem;         /* ← 1.5rem などから少し増やす */
+  font-size: 0.9rem;
+  background-color: #1a1a1a;
+  color: #aaa;
+  border-top: 1px solid #262626; /* うっすら区切り線 */
+}
+
+.footer-links {
+  margin-bottom: 0.75rem;        /* ← リンクとコピーライトの間に余白 */
+  line-height: 1.6;              /* リンク行の行間もゆったり */
+}
+
+.footer-links a {
+  color: var(--accent-color);
+  text-decoration: none;
+  margin: 0 0.65rem;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+footer small {
+  display: block;                /* ブロック化して上下に余白を持たせる */
+  margin-top: 0.25rem;           /* 最後に少しだけ追い余白 */
+  color: #8a8a8a;
+}
 
     @media (min-width: 600px) {
       .btn-group {
