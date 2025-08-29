@@ -70,6 +70,39 @@
       color: #ccc;
     }
 
+    .apps {
+      margin: 3rem 0;
+      text-align: center;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .apps h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-color);
+    }
+
+    .app-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      justify-items: center;
+    }
+
+    .app-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .app-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+    }
+
     .btn-group {
       margin-top: 2rem;
       display: flex;
@@ -123,9 +156,31 @@
   <main>
     <img src="hero.png" alt="Re:Pra Visual" class="visual" />
     <p class="description">反復学習をサポートするアプリ「<strong>Re:Pra</strong>」シリーズの公式サイトです。</p>
+
+    <!-- ▼ アプリ一覧 -->
+    <section class="apps">
+      <h2>アプリ一覧</h2>
+      <div class="app-grid">
+        <div class="app-item">
+          <img src="https://isX-ssl.mzstatic.com/image/thumb/Purple126/v4/.../AppIcon.png/512x512bb.jpg" alt="Re:Pra SC" class="app-icon" />
+          <p>Re:Pra SC</p>
+          <a class="btn" href="https://apps.apple.com/jp/app/idXXXXXXXX">App Store</a>
+        </div>
+        <div class="app-item">
+          <img src="https://isX-ssl.mzstatic.com/image/thumb/Purple116/v4/.../AppIcon.png/512x512bb.jpg" alt="Re:Pra AP" class="app-icon" />
+          <p>Re:Pra AP</p>
+          <a class="btn" href="https://apps.apple.com/jp/app/idXXXXXXXX">App Store</a>
+        </div>
+        <!-- 他のアプリも同様に追加 -->
+      </div>
+    </section>
+
+    <!-- ▼ 既存ボタン群 -->
     <div class="btn-group">
       <a class="btn" href="/privacy.html">プライバシーポリシー</a>
       <a class="btn" href="/support.html">サポートページ</a>
+      <!-- ▼ フィードバックリンク -->
+      <a class="btn" href="#">フィードバック（準備中）</a>
     </div>
   </main>
 
