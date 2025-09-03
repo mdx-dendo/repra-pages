@@ -152,34 +152,37 @@ footer {
   line-height: 1.6;
 }
 
+.footer-links {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0; /* 余白はセパレータ側で付ける */
+}
+
 .footer-link {
   color: var(--text-color);
   text-decoration: none;
-  margin: 0 0.65rem;
+  padding: 0 .25rem; /* 内側に少しだけ */
+}
+
+/* 2個目以降の前にだけセパレータを付与 */
+.footer-link + .footer-link {
   position: relative;
 }
-
-.footer-link::after {
-  content: "|";
-  display: inline-block;  /* インライン要素に揃える */
-  margin: 0 0.65rem;
-  color: var(--text-color);
+.footer-link + .footer-link::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 0.9em;
+  background: currentColor;      /* 文字色と同じ */
+  margin: 0 .75rem;              /* 縦線の左右均等余白 */
+  transform: translateY(1px);    /* 文字高さと揃える微調整 */
 }
 
-/* 最後のリンクは区切りも余白も消す */
-.footer-link:last-child::after {
-  content: none;
-  margin: 0;
-}
-
-.footer-links a {
-  color: var(--text-color); 
-  text-decoration: none;
-  margin: 0 0.65rem;
-}
-
-.footer-links a:hover {
-  color: var(--accent-color); 
+.footer-link:hover {
+  color: var(--accent-color);
   text-decoration: underline;
 }
 
@@ -235,7 +238,7 @@ footer small {
           <a class="app-link" href="https://apps.apple.com/us/app/re-pra-es-エンベデッドスペシャリスト-過去問/id6751254427">App Storeで見る →</a>
         </div>
         <div class="app-item">
-          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f2/b2/e8/f2b2e83d-b116-8849-9083-0eda2dd5ca10/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg.jpg" alt="Re:Pra SC" class="app-icon" />
+          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f2/b2/e8/f2b2e83d-b116-8849-9083-0eda2dd5ca10/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" alt="Re:Pra SC" class="app-icon" />
           <p>Re:Pra PM</p>
           <a class="app-link" href="https://apps.apple.com/us/app/re-pra-pm/id6749874107">App Storeで見る →</a>
         </div>
