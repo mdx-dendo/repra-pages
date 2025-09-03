@@ -140,41 +140,42 @@
 
 footer {
   text-align: center;
-  padding: 2rem 1.25rem;         /* ← 1.5rem などから少し増やす */
+  padding: 2rem 1.25rem;
   font-size: 0.9rem;
   background-color: #1a1a1a;
-  color: var(--text-color); 
-  border-top: 1px solid #262626; /* うっすら区切り線 */
+  color: var(--text-color);
+  border-top: 1px solid #262626;
 }
 
+/* 中央寄せ */
 .footer-links {
   margin-bottom: 0.75rem;
   line-height: 1.6;
-  display: flex;
+  display: inline-flex;           /* 内容幅で中央に配置される */
   align-items: center;
   justify-content: center;
-  gap: 0; /* 余白はセパレータ側で付ける */
 }
 
+/* リンク本体 */
 .footer-link {
   color: var(--text-color);
   text-decoration: none;
-  padding: 0 .25rem; /* 内側に少しだけ */
 }
 
-/* 2個目以降の前にだけセパレータを付与 */
-.footer-link + .footer-link {
-  position: relative;
-}
-.footer-link + .footer-link::before {
+/* 各リンクの「後ろ」にだけセパレータ線＋左右の均等余白 */
+.footer-link:not(:last-child)::after {
   content: "";
   display: inline-block;
   width: 1px;
   height: 0.9em;
-  background: currentColor;      /* 文字色と同じ */
-  margin: 0 .75rem;              /* 縦線の左右均等余白 */
-  transform: translateY(1px);    /* 文字高さと揃える微調整 */
+  background: currentColor;
+  margin: 0 1.2rem;               /* この左右余白が“線の前後”で等間隔を作る */
+  transform: translateY(1px);
 }
+
+/* 外周の左右も対称にするためのパディング（中央ズレ防止） */
+.footer-link:first-child { padding-left: 1.2rem; }
+.footer-link:last-child  { padding-right: 1.2rem; }
 
 .footer-link:hover {
   color: var(--accent-color);
@@ -182,9 +183,9 @@ footer {
 }
 
 footer small {
-  display: block;                /* ブロック化して上下に余白を持たせる */
-  margin-top: 0.25rem;           /* 最後に少しだけ追い余白 */
-  color: var(--text-color); 
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--text-color);
 }
 
     @media (min-width: 600px) {
