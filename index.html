@@ -159,16 +159,15 @@ footer {
   position: relative;
 }
 
-/* 各リンクの後に区切りを追加 */
 .footer-link::after {
   content: "|";
-  margin-left: 0.65rem;
+  margin: 0 0.65rem;    /* 左右に均等な余白 */
   color: var(--text-color);
 }
 
-/* 最後のリンクだけ区切りを消す */
 .footer-link:last-child::after {
   content: "";
+  margin: 0;            /* 最後は余白も消す */
 }
 
 .footer-links a {
