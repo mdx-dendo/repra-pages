@@ -188,6 +188,49 @@ footer small {
   color: var(--text-color);
 }
 
+/* クリックで拡大することを示すカーソル */
+.zoomable { cursor: zoom-in; }
+
+/* オーバーレイ全体 */
+.zoom-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.72);
+  display: grid; place-items: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .18s ease;
+  z-index: 9999;
+}
+.zoom-overlay.open { opacity: 1; pointer-events: auto; }
+
+/* 拡大画像 */
+.zoom-img {
+  max-width: min(88vw, 520px);
+  max-height: min(88vh, 520px);
+  border-radius: 24px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.45);
+  transform: scale(.92);
+  opacity: 0;
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), opacity .22s ease;
+}
+.zoom-overlay.open .zoom-img {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* 閉じるボタン */
+.zoom-close {
+  position: absolute; top: 20px; right: 20px;
+  background: transparent; border: 0; color: #fff;
+  font-size: 28px; line-height: 1; cursor: pointer;
+  padding: 6px 10px;
+}
+.zoom-close:focus-visible { outline: 2px solid #fff; border-radius: 6px; }
+
+/* アニメ嫌いな人向け配慮 */
+@media (prefers-reduced-motion: reduce) {
+  .zoom-overlay, .zoom-img { transition: none !important; }
+}
+
     @media (min-width: 600px) {
       .btn-group {
         flex-direction: row;
@@ -214,37 +257,72 @@ footer small {
       <h2>アプリ一覧</h2>
       <div class="app-grid">
         <div class="app-item">
-          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b8/7c/d0/b87cd0f6-fcee-0497-a807-90205b0f6e17/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" alt="Re:Pra SC" class="app-icon" />
+          <img 
+            src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b8/7c/d0/b87cd0f6-fcee-0497-a807-90205b0f6e17/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg"
+            data-full="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b8/7c/d0/b87cd0f6-fcee-0497-a807-90205b0f6e17/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg"
+            alt="Re:Pra SC"
+            class="app-icon zoomable"
+          />
           <p>Re:Pra SC</p>
           <a class="app-link" href="https://apps.apple.com/us/app/re-pra-sc/id6746353919">App Storeで見る →</a>
         </div>
         <div class="app-item">
-          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3c/cd/21/3ccd2178-044e-7d49-0408-bc214eecea85/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" alt="Re:Pra NW" class="app-icon" />
+          <img 
+            src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3c/cd/21/3ccd2178-044e-7d49-0408-bc214eecea85/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg"
+            data-full="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3c/cd/21/3ccd2178-044e-7d49-0408-bc214eecea85/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg"
+            alt="Re:Pra NW" 
+            class="app-icon zoomable"
+          />
           <p>Re:Pra NW</p>
           <a class="app-link" href="https://apps.apple.com/us/app/re-pra-nw/id6749206119">App Storeで見る →</a>
         </div>
         <div class="app-item">
-          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bc/01/c2/bc01c2b4-6bd6-3b95-b30f-666e8e27e7bc/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" alt="Re:Pra SC" class="app-icon" />
+          <img 
+            src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bc/01/c2/bc01c2b4-6bd6-3b95-b30f-666e8e27e7bc/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg"
+            data-full="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bc/01/c2/bc01c2b4-6bd6-3b95-b30f-666e8e27e7bc/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg"
+            alt="Re:Pra DB" 
+            class="app-icon zoomable"
+          />
           <p>Re:Pra DB</p>
           <a class="app-link" href="https://apps.apple.com/us/app/re-pra-db-データベーススペシャリスト-過去問/id6751254008">App Storeで見る →</a>
         </div>
         <div class="app-item">
-          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/67/fc/e5/67fce5df-9540-e4c5-af8a-1522c583153c/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" alt="Re:Pra SC" class="app-icon" />
+          <img 
+            src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/67/fc/e5/67fce5df-9540-e4c5-af8a-1522c583153c/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" 
+            data-full="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/67/fc/e5/67fce5df-9540-e4c5-af8a-1522c583153c/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" 
+            alt="Re:Pra ES" 
+            class="app-icon zoomable"
+          />
           <p>Re:Pra ES</p>
           <a class="app-link" href="https://apps.apple.com/us/app/re-pra-es-エンベデッドスペシャリスト-過去問/id6751254427">App Storeで見る →</a>
         </div>
         <div class="app-item">
-          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f2/b2/e8/f2b2e83d-b116-8849-9083-0eda2dd5ca10/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" alt="Re:Pra SC" class="app-icon" />
+          <img 
+            src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f2/b2/e8/f2b2e83d-b116-8849-9083-0eda2dd5ca10/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" 
+            data-full="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f2/b2/e8/f2b2e83d-b116-8849-9083-0eda2dd5ca10/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" 
+            alt="Re:Pra PM" 
+            class="app-icon zoomable"
+          />
           <p>Re:Pra PM</p>
           <a class="app-link" href="https://apps.apple.com/us/app/re-pra-pm/id6749874107">App Storeで見る →</a>
         </div>
         <div class="app-item">
-          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/13/79/a3/1379a314-8d66-879b-0102-d3ca10a94fab/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" alt="Re:Pra AP" class="app-icon" />
+          <img 
+            src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/13/79/a3/1379a314-8d66-879b-0102-d3ca10a94fab/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" 
+            data-full="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/13/79/a3/1379a314-8d66-879b-0102-d3ca10a94fab/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" 
+            alt="Re:Pra ST" 
+            class="app-icon zoomable" 
+          />
           <p>Re:Pra ST</p>
           <a class="app-link" href="https://apps.apple.com/us/app/re-pra-st/id6751055493">App Storeで見る →</a>
         </div>
         <div class="app-item">
-          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ac/e8/a3/ace8a313-0007-10d0-297c-d2500c204d0c/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" alt="Re:Pra SC" class="app-icon" />
+          <img 
+            src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ac/e8/a3/ace8a313-0007-10d0-297c-d2500c204d0c/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg"
+            data-full="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ac/e8/a3/ace8a313-0007-10d0-297c-d2500c204d0c/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg"
+            alt="Re:Pra SA" 
+            class="app-icon zoomable" 
+          />
           <p>Re:Pra SA</p>
           <a class="app-link" href="https://apps.apple.com/us/app/re-pra-sa/id6751055608">App Storeで見る →</a>
         </div>
