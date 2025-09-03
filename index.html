@@ -161,13 +161,15 @@ footer {
 
 .footer-link::after {
   content: "|";
-  margin: 0 0.65rem;    /* 左右に均等な余白 */
+  display: inline-block;  /* インライン要素に揃える */
+  margin: 0 0.65rem;
   color: var(--text-color);
 }
 
+/* 最後のリンクは区切りも余白も消す */
 .footer-link:last-child::after {
-  content: "";
-  margin: 0;            /* 最後は余白も消す */
+  content: none;
+  margin: 0;
 }
 
 .footer-links a {
