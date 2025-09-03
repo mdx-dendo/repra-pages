@@ -143,7 +143,7 @@ footer {
   padding: 2rem 1.25rem;         /* ← 1.5rem などから少し増やす */
   font-size: 0.9rem;
   background-color: #1a1a1a;
-  color: #aaa;
+  color: var(--text-color); 
   border-top: 1px solid #262626; /* うっすら区切り線 */
 }
 
@@ -153,19 +153,20 @@ footer {
 }
 
 .footer-links a {
-  color: var(--accent-color);
+  color: var(--text-color); 
   text-decoration: none;
   margin: 0 0.65rem;
 }
 
 .footer-links a:hover {
+  color: var(--accent-color); 
   text-decoration: underline;
 }
 
 footer small {
   display: block;                /* ブロック化して上下に余白を持たせる */
   margin-top: 0.25rem;           /* 最後に少しだけ追い余白 */
-  color: #8a8a8a;
+  color: var(--text-color); 
 }
 
     @media (min-width: 600px) {
